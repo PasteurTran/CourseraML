@@ -35,19 +35,12 @@ minimum = [0 0 0];
 for c = 1:length(C_vec)
     for s = 1:length(sigma_vec)
         model= svmTrain(X, y, C_vec(c), @(x1, x2) gaussianKernel(x1, x2, sigma_vec(s))); 
-        predictions = svmPredict(model, Xval);
-        % add to table - save the sigma and C values used
-        finalResult = [ finalResult; mean(double(predictions ~= yval)) C_vec(c) sigma_vec(s)];
-        
-        
-    end
-end
+        prediction = svmPredict(model, Xval);
+      
+        finalResult = mean(double(predictions ~= yval));
 
-% sort rows and then get the top row as this is minimum
-sortedResults = sortrows(finalResult,1)
-minimum = sortedResults(1,:);
-C = minimum(2);
-sigma = minimum(3);
+
+
 
 
 % =========================================================================
