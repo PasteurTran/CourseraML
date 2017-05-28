@@ -100,7 +100,12 @@ while ~isempty(email_contents)
 
 
 
-
+    for i = 1:length(vocabList)
+        if(strcmp(str, vocabList{i}))
+           %we take the word_indice and added it
+           word_indices = [word_indices ; i];
+        end
+    end
 
 
 
